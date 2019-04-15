@@ -17,16 +17,19 @@ class Team {
 private:
     String *players;
     size_t playercnt;
+    String coach;
 public:
-    Team() : players(NULL), playercnt(0) {}
+    Team() : players(NULL), playercnt(0), coach("") {}
 
     Team(const Team &rteam);
 
-    void addplayer(const String player);
+    void addplayer(const String newplayer);
 
-    size_t size() { return playercnt; }
+    void removeplayer(size_t idx);
 
-   // const size_t size() { return playercnt; } const;
+    void addcoach(const String coach);
+
+    const size_t size() { return playercnt; } const;
 
     Team &operator=(const Team &team);
 
@@ -34,12 +37,12 @@ public:
 
     const String &operator[](size_t index) const;
 
-    ostream &operator<<(ostream &os);
-
     virtual ~Team() { delete[] players; }
+
 
 };
 
+ostream &operator<<(ostream &os, Team &out);
 
 
 

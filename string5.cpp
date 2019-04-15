@@ -22,6 +22,7 @@
 #include <iostream>             // Kiíratáshoz
 #include <cstring>              // Sztringműveletekhez
 #include "string5.h"
+#include "memtrace.h"
 
 
 /// Konstruktorok: egy char karakterből (createString)

@@ -1,28 +1,6 @@
 #ifndef STRING_H
 #define STRING_H
-/**
- * \file string5.h
- *
- * Ez a fájl tartalmazza a
- *   - String osztály deklarációját
- *   - az inline függvényeket. Ha valamit inline-ként akar megvalósítani,
- *     akkor azt ebbe a fájlba írja! Tipikusan a rövid kódokat szokás
- *     inline-két megvalósítani (pl: c_str).
- *     Más függvényeket ill. definíciókat ne írjon a .h fájlba!
- *
- * A C nyelven megvalósított String adatszerkezetet (string1) a 2. laboron a
- * C++ nyelv nem OO eszközeivel átalakítottuk (string2_cpp).
- *
- * Most továbblépünk és a String adatszerkezetet igazi osztállyá alakítjuk:
- * Az adatokon műveletet végző függvényeket összezárjuk az adatokkal,
- * így ezek a függvények tagfüggvényekké válnak és
- *   formálisan eltűnik az első paraméterük (s0) (ezt this-ként azért megkapják).
- * A nevük is megváltozik, mert most már az összetartozást, és a
- *   paraméterek típusára való utalást már nem a név hordozza, hanem az osztály.
- * A createString... alakú függvényekből konstruktorok keletkeznek.
- * A disposeString destruktorrá alakul át.
- * Egyes műveletvégző függvényekből pedig operátor függvény lesz.
- */
+
 
 /**
  * Az Ön feladata ebben fájlban bővíteni a megkezdett deklarációt, és string5.cpp
