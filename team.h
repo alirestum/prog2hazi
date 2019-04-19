@@ -10,16 +10,18 @@
 using namespace std;
 
 #include "string5.h"
+#include "memtrace.h"
 
 
 class Team {
 
-private:
+protected:
     String *players;
     size_t playercnt;
     String coach;
 public:
     Team() : players(NULL), playercnt(0), coach("") {}
+    Team(String coachname): players(NULL), playercnt(0), coach(coachname){}
 
     Team(const Team &rteam);
 
@@ -37,13 +39,14 @@ public:
 
     const String &operator[](size_t index) const;
 
-    virtual ~Team() { delete[] players; }
+    virtual ~Team() { delete[] players;}
+
+    const String &getCoach() const;
 
 
 };
 
 ostream &operator<<(ostream &os, Team &out);
-
 
 
 #endif //PROG2HAZI_TEAM_H

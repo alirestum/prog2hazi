@@ -77,11 +77,16 @@ void Team::addcoach(const String coach) {
     this->coach = coach;
 }
 
+const String &Team::getCoach() const {
+    return coach;
+}
+
 
 ostream &operator<<(ostream &os, Team &out) {
     os << "Jatekosok:\n";
     for (size_t i = 0; i < out.size(); i++)
         os << "\t" << out[i] << "\n";
+    os << "Edzo:\n" << "\t" << out.getCoach();
     return os;
 }
 
