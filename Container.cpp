@@ -22,9 +22,17 @@ void Container::addteam(const Team newteam){
         teamcnt++;
     }
 }
-/*
+
 std::ostream& operator<<(std::ostream& os, Container& out){
     for(size_t i =0; i<out.size(); i++)
         os << out[i] <<"\n";
     return os;
-}*/
+}
+
+Team &Container::operator[](size_t idx) {
+    return teams[idx];
+}
+
+const Team &Container::operator[](size_t idx) const {
+    return teams[idx];
+}

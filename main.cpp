@@ -41,10 +41,10 @@ int main() {
     Container.addteam(team2);
     Container.addteam(team3);
 
-    std::cout << "Simple team:\n" << team1 << std::endl;
-    std::cout << "Basketball\n" << team2 << std::endl;
-    std::cout << "Football\n" << team3 << std::endl;
-    std::cout << "Handball\n" << team4 << std::endl;
+    // std::cout << "Simple team:\n" << team1 << std::endl;
+    // std::cout << "Basketball\n" << team2 << std::endl;
+    // std::cout << "Football\n" << team3 << std::endl;
+    // std::cout << "Handball\n" << team4 << std::endl;
     std::cout << Container << std::endl;
     return 0;
 }

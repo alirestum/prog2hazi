@@ -4,21 +4,29 @@
 
 #ifndef PROG2HAZI_CONTAINER_H
 #define PROG2HAZI_CONTAINER_H
+
 #include "team.h"
 #include <iostream>
 
 class Container {
 private:
-    Team* teams;
+    Team *teams;
     size_t teamcnt;
 public:
-    Container(): teams(NULL), teamcnt(0){}
+    Container() : teams(NULL), teamcnt(0) {}
 
-    const size_t size() { return teamcnt; } const;
+    const size_t size() { return teamcnt; }
+
+    const;
+
+    Team &operator[](size_t idx);
+
+    const Team &operator[](size_t idx) const;
+
     void addteam(const Team newteam);
 
 };
 
-std::ostream& operator<<(std::ostream& os, Container& out);
+std::ostream &operator<<(std::ostream &os, Container &out);
 
 #endif //PROG2HAZI_CONATINER_H
