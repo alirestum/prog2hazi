@@ -69,7 +69,6 @@
 #include <iostream>
 
 
-
 /**
  * A String osztály.
  * A 'pData'-ban vannak a karakterek (a lezáró nullával együtt), 'len' a hossza.
@@ -86,11 +85,8 @@ class String {
 public:
 
 
-
-
-
     /// Paraméter nélküli konstruktor:
-    String() :pData(NULL), len(0) {}
+    String() : pData(NULL), len(0) {}
 
     /// Sztring hosszát adja vissza.
     /// @return sztring tényleges hossza (lezáró nulla nélkül).
@@ -98,20 +94,24 @@ public:
 
     /// C-sztringet ad vissza
     /// @return pointer a tárolt, vagy azzal azonos tartalmú nullával lezárt sztring-re.
-    const char* c_str() const { return pData == NULL ? "\0" : pData;}
+    const char *c_str() const { return pData == NULL ? "\0" : pData; }
 
 /// Itt folytassa a tagfüggvények deklarációit a feladatoknak megfelelően.
 /// ...
-    ~String(){delete[] pData;}
+    ~String() { delete[] pData; }
+
     String(char c);
+
     String(const char *s);
-    String(const String& rhs);
-    String& operator=(const String& rhs);
+
+    String(const String &rhs);
+
+    String &operator=(const String &rhs);
 
 }; /// Itt az osztály deklarációjának vége
 
 
-std::ostream& operator<<(std::ostream &os, const String& out);
+std::ostream &operator<<(std::ostream &os, const String &out);
 /// Ide kerülnek a globális operátorok deklarációi.
 /// ...
 

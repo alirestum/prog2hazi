@@ -6,6 +6,8 @@
 #define PROG2HAZI_FOOTBALL_H
 
 #include "team.h"
+#include "string5.h"
+#include <iostream>
 
 class Football: public Team{
 private:
@@ -26,5 +28,6 @@ public:
 
 };
 
+std::ostream& operator<<(std::ostream& os, Football& out);
 
 #endif //PROG2HAZI_FOOTBALL_H

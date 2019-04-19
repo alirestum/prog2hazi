@@ -1,29 +1,28 @@
 //
-// Created by Restum Ali on 2019-04-15.
+// Created by Restum Ali on 2019-04-19.
 //
 
-#include "Football.h"
+#include "Handball.h"
 
-const String &Football::getSecondcoach() const {
-    return secondcoach;
+int Handball::getYearlybonus() const {
+    return yearlybonus;
 }
 
-void Football::setSecondcoach(const String &secondcoach) {
-    Football::secondcoach = secondcoach;
+void Handball::setYearlybonus(int yearlybonus) {
+    Handball::yearlybonus = yearlybonus;
 }
 
-Football::Football(const Football &rhs) {
+Handball::Handball(const Handball &rhs) {
     players = new String[rhs.playercnt];
     playercnt = rhs.playercnt;
     for (size_t i = 0; i < rhs.playercnt; i++) {
         players[i] = rhs[i];
     }
     coach = rhs.coach;
-    secondcoach = rhs.secondcoach;
-
+    yearlybonus = rhs.yearlybonus;
 }
 
-Football &Football::operator=(const Football &rhs) {
+Handball &Handball::operator=(const Handball &rhs) {
     if (this->players != rhs.players) {
         delete[] players;
         playercnt = rhs.playercnt;
@@ -31,18 +30,16 @@ Football &Football::operator=(const Football &rhs) {
         for (size_t i = 0; i < playercnt; i++)
             players[i] = rhs.players[i];
         coach = rhs.coach;
-        secondcoach = rhs.secondcoach;
+        yearlybonus = rhs.yearlybonus;
     }
     return *this;
-
 }
 
-std::ostream &operator<<(std::ostream &os, Football &out) {
+std::ostream &operator<<(std::ostream &os, Handball &out) {
     os << "Jatekosok:\n";
     for (size_t i = 0; i < out.size(); i++)
         os << "\t" << out[i] << "\n";
     os << "Coach:\n\t" << out.getCoach() << "\n";
-    os << "Second coach:\n\t" << out.getSecondcoach();
+    os << "Yearly bonus:\n\t" << out.getYearlybonus();
     return os;
 }
-

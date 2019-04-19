@@ -4,12 +4,12 @@
 
 #include "Basketball.h"
 
-int Basketball::getYearlybonus() const {
-    return yearlybonus;
+int Basketball::getpompomcnt() const {
+    return pompomcnt;
 }
 
-void Basketball::setYearlybonus(int yearlybonus) {
-    Basketball::yearlybonus = yearlybonus;
+void Basketball::setpompomcnt(int pompomcnt) {
+    Basketball::pompomcnt = pompomcnt;
 }
 
 Basketball::Basketball(const Basketball &rhs) {
@@ -19,10 +19,10 @@ Basketball::Basketball(const Basketball &rhs) {
         players[i] = rhs[i];
     }
     coach = rhs.coach;
-    yearlybonus = rhs.yearlybonus;
+    pompomcnt = rhs.pompomcnt;
 }
 
-Basketball& Basketball::operator=(const Basketball &rhs) {
+Basketball &Basketball::operator=(const Basketball &rhs) {
     if (this->players != rhs.players) {
         delete[] players;
         playercnt = rhs.playercnt;
@@ -30,12 +30,10 @@ Basketball& Basketball::operator=(const Basketball &rhs) {
         for (size_t i = 0; i < playercnt; i++)
             players[i] = rhs.players[i];
         coach = rhs.coach;
-        yearlybonus = rhs.yearlybonus;
+        pompomcnt = rhs.pompomcnt;
     }
     return *this;
 }
-
-
 
 
 std::ostream &operator<<(std::ostream &os, Basketball &out) {
@@ -43,7 +41,7 @@ std::ostream &operator<<(std::ostream &os, Basketball &out) {
     for (size_t i = 0; i < out.size(); i++)
         os << "\t" << out[i] << "\n";
     os << "Edzo:\n\t" << out.getCoach() << "\n";
-    os << "Yearly bonus:\n\t" << out.getYearlybonus();
+    os << "PomPomCnt:\n\t" << out.getpompomcnt();
     return os;
 
 }

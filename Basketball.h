@@ -12,14 +12,14 @@
 
 class Basketball : public Team {
 private:
-    int yearlybonus;
+    int pompomcnt;
 public:
-    Basketball() : Team(), yearlybonus(0) {}
-    Basketball(String coachname, int bonus): Team(coachname), yearlybonus(bonus){}
+    Basketball() : Team(), pompomcnt(0) {}
+    Basketball(String coachname, int bonus): Team(coachname), pompomcnt(bonus){}
 
-    int getYearlybonus() const;
+    int getpompomcnt() const;
 
-    void setYearlybonus(int yearlybonus);
+    void setpompomcnt(int pompomcnt);
 
     Basketball(const Basketball &rhs);
 

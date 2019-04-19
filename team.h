@@ -11,6 +11,7 @@ using namespace std;
 
 #include "string5.h"
 #include "memtrace.h"
+#include <iostream>
 
 
 class Team {
@@ -21,7 +22,8 @@ protected:
     String coach;
 public:
     Team() : players(NULL), playercnt(0), coach("") {}
-    Team(String coachname): players(NULL), playercnt(0), coach(coachname){}
+
+    Team(String coachname) : players(NULL), playercnt(0), coach(coachname) {}
 
     Team(const Team &rteam);
 
@@ -39,7 +41,7 @@ public:
 
     const String &operator[](size_t index) const;
 
-    virtual ~Team() { delete[] players;}
+    virtual ~Team() { delete[] players; }
 
     const String &getCoach() const;
 
