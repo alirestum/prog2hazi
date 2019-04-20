@@ -25,6 +25,8 @@ public:
 
     void addteam(const Team newteam);
 
+    ~Container() { delete[] teams; }
+
 };
 
 std::ostream &operator<<(std::ostream &os, Container &out);
