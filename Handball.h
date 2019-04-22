@@ -17,8 +17,8 @@ private:
 public:
     Handball() : Team(), yearlybonus(0) {}
 
-    Handball(String coachname, int bonus) : Team(coachname), yearlybonus(bonus) {}
-
+    Handball(String coachname, String tname, int bonus) : Team(coachname, tname), yearlybonus(bonus) {}
+    Handball(String coachname, String tname) : Team(coachname, tname), yearlybonus(0) {}
     int getYearlybonus() const;
 
     void setYearlybonus(int yearlybonus);

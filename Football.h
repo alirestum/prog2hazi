@@ -14,8 +14,8 @@ private:
     String secondcoach;
 public:
     Football(): Team(), secondcoach(""){}
-    Football(String coachname):Team(coachname), secondcoach(""){}
-    Football(String coach, String secondcoach): Team(coach), secondcoach(secondcoach){}
+    Football(String coachname, String tname):Team(coachname, tname), secondcoach(""){}
+    Football(String coach, String secondcoach, String tname): Team(coach, tname), secondcoach(secondcoach){}
 
     Football(const Football& rhs);
 

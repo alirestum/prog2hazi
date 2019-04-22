@@ -20,6 +20,7 @@ Handball::Handball(const Handball &rhs) {
     }
     coach = rhs.coach;
     yearlybonus = rhs.yearlybonus;
+    name = rhs.name;
 }
 
 Handball &Handball::operator=(const Handball &rhs) {
@@ -31,15 +32,17 @@ Handball &Handball::operator=(const Handball &rhs) {
             players[i] = rhs.players[i];
         coach = rhs.coach;
         yearlybonus = rhs.yearlybonus;
+        name = rhs.name;
     }
     return *this;
 }
 
 std::ostream &operator<<(std::ostream &os, Handball &out) {
-    os << "Jatekosok:\n";
+    os << "Team: " << out.getName() << "\n";
+    os << "\tJatekosok:\n";
     for (size_t i = 0; i < out.size(); i++)
-        os << "\t" << out[i] << "\n";
-    os << "Coach:\n\t" << out.getCoach() << "\n";
-    os << "Yearly bonus:\n\t" << out.getYearlybonus();
+        os << "\t\t" << out[i] << "\n";
+    os << "\tCoach:\n\t" << out.getCoach() << "\n";
+    os << "\tYearly bonus:\n\t" << out.getYearlybonus();
     return os;
 }

@@ -28,9 +28,10 @@ Team::Team(const Team &rteam) {
         players[i] = rteam[i];
     }
     coach = rteam.coach;
+    name = rteam.name;
 }
 
-void Team::addplayer(const String newplayer) {
+void Team::addplayer(const String &newplayer) {
     if (players != NULL) {
         String *temp;
         temp = new String[playercnt + 1];
@@ -69,6 +70,7 @@ Team &Team::operator=(const Team &team) {
         for (size_t i = 0; i < playercnt; i++)
             players[i] = team.players[i];
         coach = team.coach;
+        name = team.name;
     }
     return *this;
 }
@@ -81,12 +83,21 @@ const String &Team::getCoach() const {
     return coach;
 }
 
+const String &Team::getName() const {
+    return name;
+}
+
+void Team::setName(const String &name) {
+    Team::name = name;
+}
+
 
 ostream &operator<<(ostream &os, Team &out) {
-    os << "Jatekosok:\n";
+    os << "Team: " << out.getName() << "\n";
+    os << "\tJatekosok:\n";
     for (size_t i = 0; i < out.size(); i++)
-        os << "\t" << out[i] << "\n";
-    os << "Edzo:\n" << "\t" << out.getCoach();
+        os << "\t\t" << out[i] << "\n";
+    os << "\tEdzo:\n" << "\t" << out.getCoach();
     return os;
 }
 

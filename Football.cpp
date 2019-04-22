@@ -20,6 +20,7 @@ Football::Football(const Football &rhs) {
     }
     coach = rhs.coach;
     secondcoach = rhs.secondcoach;
+    name = rhs.name;
 
 }
 
@@ -32,17 +33,19 @@ Football &Football::operator=(const Football &rhs) {
             players[i] = rhs.players[i];
         coach = rhs.coach;
         secondcoach = rhs.secondcoach;
+        name = rhs.name;
     }
     return *this;
 
 }
 
 std::ostream &operator<<(std::ostream &os, Football &out) {
-    os << "Jatekosok:\n";
+    os << "Team: " << out.getName() << "\n";
+    os << "\tJatekosok:\n";
     for (size_t i = 0; i < out.size(); i++)
-        os << "\t" << out[i] << "\n";
-    os << "Coach:\n\t" << out.getCoach() << "\n";
-    os << "Second coach:\n\t" << out.getSecondcoach();
+        os << "\t\t" << out[i] << "\n";
+    os << "\tCoach:\n\t" << out.getCoach() << "\n";
+    os << "\tSecond coach:\n\t" << out.getSecondcoach();
     return os;
 }
 

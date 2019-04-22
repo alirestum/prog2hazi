@@ -7,6 +7,7 @@
 
 #include "team.h"
 #include <iostream>
+#include <fstream>
 
 class Container {
 private:
@@ -15,19 +16,24 @@ private:
 public:
     Container() : teams(NULL), teamcnt(0) {}
 
-    const size_t size() { return teamcnt; }
-
-    const;
+    const size_t size() { return teamcnt; };
 
     Team &operator[](size_t idx);
 
     const Team &operator[](size_t idx) const;
 
-    void addteam(const Team newteam);
+    void addteam(Team &newteam);
+
+    void list(std::ostream& os, size_t idx){
+        teams[idx].list(os);
+    }
+
+    void savedata(String &fname);
 
     ~Container() { delete[] teams; }
 
 };
+
 
 std::ostream &operator<<(std::ostream &os, Container &out);
 

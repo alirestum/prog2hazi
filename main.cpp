@@ -6,15 +6,19 @@
 #include "Football.h"
 #include "Handball.h"
 #include "Container.h"
+#include <fstream>
 
 int main() {
     //Declarations
     Container Container;
     Team team1;
     Basketball team2;
+    Basketball *t2ptr = &team2;
+
+
     Football team3;
     Handball team4;
-    String player1("player1");
+    String player1("player1.txt");
     String player2("player2");
     String player3("player3");
     String player4("player4");
@@ -37,14 +41,16 @@ int main() {
     team4.addplayer(player1); //Handball
     team4.setYearlybonus(500);
 
-    Container.addteam(team1);
     Container.addteam(team2);
-    Container.addteam(team3);
+   // Container.addteam(team3);
 
     // std::cout << "Simple team:\n" << team1 << std::endl;
-    // std::cout << "Basketball\n" << team2 << std::endl;
+     //std::cout << "Basketball\n" << team2 << std::endl;
+     team2.list(std::cout);
+     Container.list(std::cout, 0);
     // std::cout << "Football\n" << team3 << std::endl;
     // std::cout << "Handball\n" << team4 << std::endl;
-    std::cout << Container << std::endl;
+   // std::cout << Container << std::endl;
+   // Container.savedata(player1);
     return 0;
 }

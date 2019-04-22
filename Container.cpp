@@ -5,34 +5,45 @@
 #include "Container.h"
 
 
-void Container::addteam(const Team newteam){
-    if(teams != NULL){
+void Container::addteam(Team &newteam) {
+    if (teams != nullptr) {
         Team *temp;
-        temp = new Team[teamcnt+1];
-        for( size_t i=0; i<teamcnt; i++)
+        temp = new Team[teamcnt + 1];
+        for (size_t i = 0; i < teamcnt; i++)
             temp[i] = teams[i];
-        temp[teamcnt]= newteam;
-        delete [] teams;
+        temp[teamcnt] = newteam;
+        delete[] teams;
         teams = temp;
         teamcnt++;
-    }
-    else {
-        teams = new Team[teamcnt+1];
+    } else {
+        teams = new Team[teamcnt + 1];
         teams[teamcnt] = newteam;
         teamcnt++;
     }
 }
 
-std::ostream& operator<<(std::ostream& os, Container& out){
-    for(size_t i =0; i<out.size(); i++)
-        os << out[i] <<"\n";
+std::ostream &operator<<(std::ostream &os, Container &out) {
+    for (size_t i = 0; i < out.size(); i++)
+        os << out[i] << "\n";
     return os;
 }
+
+
 
 Team &Container::operator[](size_t idx) {
     return teams[idx];
 }
 
+
 const Team &Container::operator[](size_t idx) const {
     return teams[idx];
+}
+
+
+void Container::savedata(String &fname) {
+    fstream FILE;
+    FILE.open(fname.c_str(), ios::out);
+    for (size_t i = 0; i < teamcnt; i++)
+        FILE << teams[i] << "\n";
+    FILE.close();
 }
