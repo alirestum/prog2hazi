@@ -11,26 +11,26 @@
 
 class Container {
 private:
-    Team *teams;
+    Team **teams;
     size_t teamcnt;
 public:
-    Container() : teams(NULL), teamcnt(0) {}
+    Container() : teams(nullptr), teamcnt(0) {}
 
     const size_t size() { return teamcnt; };
 
-    Team &operator[](size_t idx);
+    Team *operator[](size_t idx);
 
-    const Team &operator[](size_t idx) const;
+    const Team *operator[](size_t idx) const;
 
-    void addteam(Team &newteam);
+    void addteam(Team *newteam);
 
     void list(std::ostream& os, size_t idx){
-        teams[idx].list(os);
+        teams[idx]->list(os);
     }
 
     void savedata(String &fname);
 
-    ~Container() { delete[] teams; }
+    ~Container();
 
 };
 

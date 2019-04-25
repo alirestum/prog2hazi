@@ -13,13 +13,13 @@
 using namespace std;
 
 
-const String &Team::operator[](size_t index) const {
-    return players[index];
+const char *Team::operator[](size_t index) const {
+    return players[index].c_str();
 }
 
-String &Team::operator[](size_t index) {
-    return players[index];
-}
+/*char *Team::operator[](size_t index) {
+    return players[index].c_str();
+}*/
 
 Team::Team(const Team &rteam) {
     players = new String[rteam.playercnt];
@@ -79,12 +79,12 @@ void Team::addcoach(const String coach) {
     this->coach = coach;
 }
 
-const String &Team::getCoach() const {
-    return coach;
+const char *Team::getCoach() const {
+    return coach.c_str();
 }
 
-const String &Team::getName() const {
-    return name;
+const char *Team::getName() const {
+    return name.c_str();
 }
 
 void Team::setName(const String &name) {
@@ -92,10 +92,11 @@ void Team::setName(const String &name) {
 }
 
 
+
 ostream &operator<<(ostream &os, Team &out) {
     os << "Team: " << out.getName() << "\n";
     os << "\tJatekosok:\n";
-    for (size_t i = 0; i < out.size(); i++)
+    for (int i = 0; i < out.size(); i++)
         os << "\t\t" << out[i] << "\n";
     os << "\tEdzo:\n" << "\t" << out.getCoach();
     return os;

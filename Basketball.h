@@ -13,6 +13,7 @@
 class Basketball : public Team {
 private:
     int pompomcnt;
+
 public:
     Basketball() : Team(), pompomcnt(0) {}
     Basketball(String coachname, int bonus, String tname): Team(coachname, tname), pompomcnt(bonus){}
@@ -28,7 +29,7 @@ public:
     void list(std::ostream& os){
         os << "Team: " << this->getName() << "\n";
         os << "\tJatekosok:\n";
-        for (size_t i = 0; i < this->size(); i++)
+        for (size_t i = 0; i < this->playercnt; i++)
             os << "\t\t" << players[i] << "\n";
         os << "\tEdzo:\n\t" << this->getCoach() << "\n";
         os << "\tPomPomCnt:\n\t" << this->getpompomcnt();

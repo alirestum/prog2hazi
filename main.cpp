@@ -1,4 +1,6 @@
 #include <iostream>
+
+using namespace std;
 #include "string5.h"
 #include "team.h"
 #include "memtrace.h"
@@ -6,51 +8,99 @@
 #include "Football.h"
 #include "Handball.h"
 #include "Container.h"
+#include "gtest_lite.h"
 #include <fstream>
+
+#define Teszt 1
+
+/* Teszt esetek:
+ * Teszt == 1 -> Team osztály tesztjei
+ * Teszt == 2 -> Basketball osztály tesztjei
+ * Teszt == 3 -> Football osztály tesztjei
+ */
 
 int main() {
     //Declarations
     Container Container;
+
+
     Team team1;
     Basketball team2;
-    Basketball *t2ptr = &team2;
-
-
     Football team3;
     Handball team4;
-    String player1("player1.txt");
+
+    String teamname("Barcelona");
+    String coachname("Test coach");
+    String player1("player1");
     String player2("player2");
     String player3("player3");
-    String player4("player4");
 
-    //Adding players, setting custom attributes
-
-    team2.addplayer(player1); //Basketball
-    team2.setpompomcnt(100000);
-
-    team1.addplayer(player1); //Simple team
+#if Teszt == 1
+    //Team tests
+    team1.setName(teamname);
+    team1.addcoach(coachname);
+    team1.addplayer(player1);
+    team1.addplayer(player1);
+    team1.addplayer(player1);
+    TEST(Team, getName)
+        {
+            EXPECT_STREQ("Barcelona", team1.getName()) << "Nev nem OK!";
+        }
+    END
+    TEST(Team, getCoach)
+        {
+            EXPECT_STREQ("Test coach", team1.getCoach()) << "Coach nem OK!";
+        }
+    END
+    TEST(Team, size)
+        {
+            EXPECT_EQ(3, team1.size()) << "Size nem OK!";
+        }
+    END
+    TEST(Team, operator[])
+        {
+            for (int i = 0; i < team1.size(); i++)
+                EXPECT_STREQ("player1", team1[i]) << "Player nem OK!";
+        }
+    END
     team1.addplayer(player2);
     team1.addplayer(player3);
-    team1.addplayer(player4);
-    team1.removeplayer(3);
+    TEST(Team, operator[])
+        {
+            EXPECT_STREQ("player2", team1[3]) << "Player nem OK!";
+        }
+    END
+    team1.removeplayer(2);
+    TEST(Team, size)
+        {
+            EXPECT_EQ(4, team1.size()) << "Size nem OK!";
+        }
+    END
+    team1.removeplayer(0);
+    team1.removeplayer(0);
+    TEST(Team, removeplayer)
+        {
+            EXPECT_STREQ("player3", team1[1]) << "Player nem OK!";
+        }
+    END
+#endif
 
-    team3.addplayer(player1);// Football
-    team3.addplayer(player2);
-    team3.setSecondcoach("Lajoska");
+#if Teszt == 2
+    team2.setpompomcnt(120);
+    TEST(Basketball, set/get-pompomcnt){
+        EXPECT_EQ(120, team2.getpompomcnt()) << "PomPomcnt nem OK!";
+    } END
 
-    team4.addplayer(player1); //Handball
-    team4.setYearlybonus(500);
+#endif
 
-    Container.addteam(team2);
-   // Container.addteam(team3);
+#if Teszt == 3
+    String second("Ernesto Valverde");
+    team3.setSecondcoach(second);
+    TEST(Football, set/get-secondcoach){
+        EXPECT_STREQ("Ernesto Valverde", team3.getSecondcoach()) << "Second coach nem OK!";
+    } END
+#endif
 
-    // std::cout << "Simple team:\n" << team1 << std::endl;
-     //std::cout << "Basketball\n" << team2 << std::endl;
-     team2.list(std::cout);
-     Container.list(std::cout, 0);
-    // std::cout << "Football\n" << team3 << std::endl;
-    // std::cout << "Handball\n" << team4 << std::endl;
-   // std::cout << Container << std::endl;
-   // Container.savedata(player1);
     return 0;
 }
+

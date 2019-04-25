@@ -20,7 +20,8 @@ public:
     Football(const Football& rhs);
 
     Football& operator=(const Football& rhs);
-    const String &getSecondcoach() const;
+
+    const char *getSecondcoach() const;
 
     void setSecondcoach(const String &secondcoach);
 

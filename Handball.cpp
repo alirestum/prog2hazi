@@ -37,10 +37,11 @@ Handball &Handball::operator=(const Handball &rhs) {
     return *this;
 }
 
+
 std::ostream &operator<<(std::ostream &os, Handball &out) {
     os << "Team: " << out.getName() << "\n";
     os << "\tJatekosok:\n";
-    for (size_t i = 0; i < out.size(); i++)
+    for (int i = 0; i < out.size(); i++)
         os << "\t\t" << out[i] << "\n";
     os << "\tCoach:\n\t" << out.getCoach() << "\n";
     os << "\tYearly bonus:\n\t" << out.getYearlybonus();

@@ -12,8 +12,6 @@
 class Handball : public Team {
 private:
     int yearlybonus;
-
-
 public:
     Handball() : Team(), yearlybonus(0) {}
 
@@ -26,6 +24,8 @@ public:
     Handball(const Handball &rhs);
 
     Handball &operator=(const Handball &rhs);
+
+    const String &getType1() const;
 };
 
 

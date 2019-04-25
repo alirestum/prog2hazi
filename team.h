@@ -14,6 +14,7 @@ using namespace std;
 #include <iostream>
 
 
+
 class Team {
 
 protected:
@@ -35,26 +36,26 @@ public:
     void addcoach(const String coach);
 
 
-    const size_t size() { return playercnt; };
+    const int size() { return playercnt; };
 
     Team &operator=(const Team &team);
 
-    String &operator[](size_t index);
+    /*char *operator[](size_t index);*/
 
-    const String &operator[](size_t index) const;
+    const char *operator[](size_t index) const;
 
     virtual ~Team() { delete[] players; }
 
-    const String &getCoach() const;
+    const char *getCoach() const;
 
-    const String &getName() const;
+    const char *getName() const;
 
     void setName(const String &name);
 
     virtual void list(std::ostream& os){
         os << "Team: " << this->getName() << "\n";
         os << "\tJatekosok:\n";
-        for (size_t i = 0; i < this->size(); i++)
+        for (size_t i = 0; i < this->playercnt; i++)
             os << "\t\t" << players[i] << "\n";
         os << "\tEdzo:\n\t" << this->getCoach() << "\n";
      //   os << "\tPomPomCnt:\n\t" << this->getpompomcnt();

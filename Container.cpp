@@ -3,24 +3,21 @@
 //
 
 #include "Container.h"
+#include "Basketball.h"
+#include "Football.h"
+#include "Handball.h"
 
 
-void Container::addteam(Team &newteam) {
-    if (teams != nullptr) {
-        Team *temp;
-        temp = new Team[teamcnt + 1];
-        for (size_t i = 0; i < teamcnt; i++)
-            temp[i] = teams[i];
-        temp[teamcnt] = newteam;
-        delete[] teams;
-        teams = temp;
-        teamcnt++;
-    } else {
-        teams = new Team[teamcnt + 1];
-        teams[teamcnt] = newteam;
-        teamcnt++;
-    }
+void Container::addteam(Team *newteam) {
+    Team **temp = new Team *[teamcnt + 1];
+    for (size_t i = 0; i < teamcnt; i++)
+        temp[i] = teams[i];
+    delete[] teams;
+    teams = temp;
+    teams[teamcnt] = newteam;
+    teamcnt++;
 }
+
 
 std::ostream &operator<<(std::ostream &os, Container &out) {
     for (size_t i = 0; i < out.size(); i++)
@@ -29,13 +26,12 @@ std::ostream &operator<<(std::ostream &os, Container &out) {
 }
 
 
-
-Team &Container::operator[](size_t idx) {
+Team *Container::operator[](size_t idx) {
     return teams[idx];
 }
 
 
-const Team &Container::operator[](size_t idx) const {
+const Team *Container::operator[](size_t idx) const {
     return teams[idx];
 }
 
@@ -46,4 +42,10 @@ void Container::savedata(String &fname) {
     for (size_t i = 0; i < teamcnt; i++)
         FILE << teams[i] << "\n";
     FILE.close();
+}
+
+Container::~Container() {
+    for (size_t i = 0; i < teamcnt; i++)
+        delete teams[i];
+    delete[] teams;
 }

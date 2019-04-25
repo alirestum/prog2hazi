@@ -38,10 +38,11 @@ Basketball &Basketball::operator=(const Basketball &rhs) {
 }
 
 
+
 std::ostream &operator<<(std::ostream &os, Basketball &out) {
     os << "Team: " << out.getName() << "\n";
     os << "\tJatekosok:\n";
-    for (size_t i = 0; i < out.size(); i++)
+    for (int i = 0; i < out.size(); i++)
         os << "\t\t" << out[i] << "\n";
     os << "\tEdzo:\n\t" << out.getCoach() << "\n";
     os << "\tPomPomCnt:\n\t" << out.getpompomcnt();
