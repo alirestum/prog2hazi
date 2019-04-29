@@ -1,6 +1,7 @@
 #include <iostream>
 
 using namespace std;
+
 #include "string5.h"
 #include "team.h"
 #include "memtrace.h"
@@ -12,13 +13,19 @@ using namespace std;
 #include <fstream>
 
 #define Teszt 3
+#define Mode 2
 
-/* Teszt esetek:
+/* Módok:
+ * Mode == 1 -> teszt mód
+ * Mode ==2 -> felhasználói mód, felülettel együtt
+
+ * Teszt esetek:
  * Teszt == 1 -> Team osztály tesztjei
  * Teszt == 2 -> Basketball osztály tesztjei
  * Teszt == 3 -> Football osztály tesztjei
  * Teszt == 4 -> Handball osztály tesztjei
  */
+
 
 int main() {
     //Declarations
@@ -35,7 +42,7 @@ int main() {
     String player2("player2");
     String player3("player3");
 
-
+#if Mode == 1
 
     //Team tests
 #if Teszt == 1
@@ -168,7 +175,90 @@ int main() {
 
 #endif
     team4.setYearlybonus(14234);
+#endif //teszt mód
 
+#if Mode == 2
+
+    class Container csapatok;
+    cout << "Fitt sportegyesulet csapatkezelo szoftver" << endl;
+    bool exit=false;
+    int option;
+    while (!exit) {
+        cout<< "Opcio kivalasztasa(irja be a szamot / betut):\n";
+        cout <<"\t1. Csapat hozzaadasa\n\t2. Csapat kezelese\n\t3. Csapat torlese\n\t4. Csapatok listazasa\n\t5. Kilepes"<< endl;
+        cin>>option;
+        switch (option) {
+            case (1):
+                //Csapat hozzaadasa
+                char tipus[10];
+                cout << "Kerem adja meg a csapat tipusat(Basketball/Football/Handball):";
+                cin >> tipus;
+                if (strcmp(tipus, "Basketball") == 0)
+                    csapatok.addteam(new Basketball);
+                else if (strcmp(tipus, "Football"))
+                    csapatok.addteam(new Football);
+                else if (strcmp(tipus, "Handball"))
+                    csapatok.addteam(new Handball);
+                else
+                    cout << "Rossz csapat tipus\n";
+                cout << "Kerem adja meg a csapat nevet:";
+                char nev[100];
+                cin >> nev;
+                csapatok[csapatok.size() - 1]->setName(nev);
+                break;
+            case (2): {
+                int team;
+                csapatok.listnames();
+                cout << "Irja be a csapat szamat:";
+                cin >> team;
+                cout << "A kivalasztott csapat:" << csapatok[team]->getName() << endl;
+                bool submenu = false;
+                while (!submenu) {
+                    int suboption;
+                    cout << "Valasszon opciot:\n";
+                    cout << "\t1. Jatekos hozzaadasa\n\t2.Jatekos torlese\n\t3.Edzo hozzaadasa\n\t4.Elozo menu\n";
+                    cin >> suboption;
+                    switch (suboption) {
+                        case (1):
+                            cout << "Adja meg a jatekos nevet:";
+                            char jnev[100];
+                            cin >> jnev;
+                            csapatok[team]->addplayer(jnev);
+                            break;
+                        case (2):
+                            cout << "Valassza ki a torlendo jatekost\t";
+                            csapatok[team]->listplayers(cout);
+                            int torlendo;
+                            cin >> torlendo;
+                            csapatok[team]->removeplayer(torlendo);
+                            break;
+                        case (3):
+                            cout << "Adja meg az edzo nevet:";
+                            char enev[100];
+                            cin >> enev;
+                            csapatok[team]->addcoach(enev);
+                            break;
+                        case (4):
+                            submenu = true;
+                            break;
+                        default:
+                            cout << "Valasszon opciot:";
+                            cout << "1. Jatekos hozzaadasa\n\t2.Jatekos torlese\n\t3.Edzo hozzaadasa\n\t4.Elozo menu\n";
+                    }
+                }
+                break;
+        }
+            case (5):
+                exit=true;
+                break;
+            default:
+                cout<< "Opcio kivalasztasa(irja be a szamot / betut):\n";
+                cout <<"\t1. Csapat hozzaadasa\n\t2. Csapat kezelese\n\t3. Csapat torlese\n\t4. Csapatok listazasa\n\tKilepes: q"<< endl;
+        }
+    }
+
+
+#endif //Felhasználói mód
 
     return 0;
 }

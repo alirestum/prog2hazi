@@ -97,7 +97,7 @@ ostream &operator<<(ostream &os, Team &out) {
     os << "Team: " << out.getName() << "\n";
     os << "\tJatekosok:\n";
     for (int i = 0; i < out.size(); i++)
-        os << "\t\t" << out[i] << "\n";
+        os << "\t\t" << i << ". " << out[i] << "\n";
     os << "\tEdzo:\n" << "\t" << out.getCoach();
     return os;
 }

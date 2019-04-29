@@ -112,6 +112,7 @@ public:
 
 
 std::ostream &operator<<(std::ostream &os, const String &out);
+
 /// Ide kerülnek a globális operátorok deklarációi.
 /// ...
 

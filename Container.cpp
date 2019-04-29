@@ -44,6 +44,11 @@ void Container::savedata(String &fname) {
     FILE.close();
 }
 
+void Container::listnames() {
+    for (int i=0; i<teamcnt; i++)
+        std::cout<< i << ". " << teams[i]->getName() << " \n";
+}
+
 Container::~Container() {
     for (size_t i = 0; i < teamcnt; i++)
         delete teams[i];

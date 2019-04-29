@@ -63,6 +63,11 @@ public:
 
     }
 
+    void listplayers(std::ostream& os){
+        for (int i=0; i<playercnt; i++)
+            os << i <<". " << players[i] << "\n";
+    }
+
 
 };
 

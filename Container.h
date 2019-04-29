@@ -30,6 +30,8 @@ public:
 
     void savedata(String &fname);
 
+    void listnames();
+
     ~Container();
 
 };
