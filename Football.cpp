@@ -39,6 +39,18 @@ Football &Football::operator=(const Football &rhs) {
 
 }
 
+void Football::list(std::ostream &os) {
+    os << "Team: " << this->getName() << "\n";
+    os << "\tJatekosok:\n";
+    for (size_t i = 0; i < this->playercnt; i++)
+        os << "\t\t" << players[i] << "\n";
+    os << "\tEdzo:\n\t" << this->getCoach() << "\n";
+    os << "\tMasodedzo:\n\t" << this->getSecondcoach();
+}
+
+const char *Football::classname() {
+    return "Football";
+}
 
 std::ostream &operator<<(std::ostream &os, Football &out) {
     os << "Team: " << out.getName() << "\n";

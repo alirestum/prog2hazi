@@ -37,6 +37,9 @@ Basketball &Basketball::operator=(const Basketball &rhs) {
     return *this;
 }
 
+const char *Basketball::classname() {
+    return "Basketball";
+}
 
 
 std::ostream &operator<<(std::ostream &os, Basketball &out) {

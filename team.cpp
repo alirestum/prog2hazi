@@ -62,6 +62,11 @@ void Team::removeplayer(size_t idx) {
 
 }
 
+
+const char *Team::classname() {
+    return "Team";
+}
+
 Team &Team::operator=(const Team &team) {
     if (this->players != team.players) {
         delete[] players;

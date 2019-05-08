@@ -33,3 +33,6 @@
 
 #CMake debug folder
 cmake-build-debug/
+
+#Doxygen folder
+documentation/

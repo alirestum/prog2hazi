@@ -36,17 +36,17 @@ const Team *Container::operator[](size_t idx) const {
 }
 
 
-void Container::savedata(String &fname) {
-    fstream FILE;
-    FILE.open(fname.c_str(), ios::out);
-    for (size_t i = 0; i < teamcnt; i++)
-        FILE << teams[i] << "\n";
-    FILE.close();
-}
 
 void Container::listnames() {
-    for (int i=0; i<teamcnt; i++)
+    for (size_t i = 0; i < teamcnt; i++)
         std::cout<< i << ". " << teams[i]->getName() << " \n";
+}
+
+void Container::removeteam(size_t idx) {
+    delete teams[idx];
+    for (size_t i = idx + 1; i < teamcnt; i++)
+        teams[i - 1] = teams[i];
+    teamcnt--;
 }
 
 Container::~Container() {

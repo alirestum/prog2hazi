@@ -37,6 +37,18 @@ Handball &Handball::operator=(const Handball &rhs) {
     return *this;
 }
 
+void Handball::list(std::ostream &os) {
+    os << "Team: " << this->getName() << "\n";
+    os << "\tJatekosok:\n";
+    for (size_t i = 0; i < this->playercnt; i++)
+        os << "\t\t" << players[i] << "\n";
+    os << "\tEdzo:\n\t" << this->getCoach() << "\n";
+    os << "\tMasodedzo:\n\t" << this->getYearlybonus();
+}
+
+const char *Handball::classname() {
+    return "Handball";
+}
 
 std::ostream &operator<<(std::ostream &os, Handball &out) {
     os << "Team: " << out.getName() << "\n";

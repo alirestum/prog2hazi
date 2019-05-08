@@ -1,4 +1,5 @@
 #include <iostream>
+#include <typeinfo>
 
 using namespace std;
 
@@ -12,7 +13,7 @@ using namespace std;
 #include "gtest_lite.h"
 #include <fstream>
 
-#define Teszt 3
+#define Teszt 1
 #define Mode 2
 
 /* Módok:
@@ -24,6 +25,7 @@ using namespace std;
  * Teszt == 2 -> Basketball osztály tesztjei
  * Teszt == 3 -> Football osztály tesztjei
  * Teszt == 4 -> Handball osztály tesztjei
+ * Teszt == 5 -> Container osztály tesztjei
  */
 
 
@@ -166,15 +168,62 @@ int main() {
     TEST(Football, set/get-secondcoach){
         EXPECT_STREQ("Ernesto Valverde", team3.getSecondcoach()) << "Second coach nem OK!";
     } END
+    Football team3copied = team3;
+    TEST(Football, ctor){
+        EXPECT_STREQ("Ernesto Valverde", team3copied.getSecondcoach()) << "Ctor nem OK!";
+    } END
+    team3copied.setSecondcoach("test");
+    team3 = team3copied;
+    TEST(Football, operator=){
+        EXPECT_STREQ("test", team3.getSecondcoach()) << "operator= nem OK!";
+    } END
 #endif
 
 
     //Handball tests
 #if Teszt == 4
-
+    team4.setYearlybonus(14234);
+    TEST(Handball, set/get-yearlybonus){
+        EXPECT_EQ(14234,team4.getYearlybonus()) << "Yearly bonus nem OK!";
+    } END
+    Handball teamcopiedhandball = team4;
+    TEST(Handball, ctor){
+            EXPECT_EQ(14234,team4.getYearlybonus()) << "Ctor bonus nem OK!";
+    } END
+    teamcopiedhandball.setYearlybonus(555);
+    team4 = teamcopiedhandball;
+    TEST(Handball, operator=){
+            EXPECT_EQ(555,team4.getYearlybonus()) << "Operator= nem OK!";
+    } END
 
 #endif
-    team4.setYearlybonus(14234);
+
+//Container tests
+#if Teszt == 5
+
+    Container.addteam(new Basketball);
+    Container.addteam(new Football);
+    Container.addteam(new Handball);
+    Container.addteam(new Team);
+
+    Container[0]->setName("basketball");
+    Container[1]->setName("Football");
+    Container[2]->setName("Handball");
+    Container[3]->setName("Team");
+
+    TEST(Container, Size){
+        EXPECT_EQ(4, (int)(Container.size())) << "Size nem ok!";
+    } END
+    TEST(Container, operator[]){
+        EXPECT_STREQ("Football", ((Football*)Container[1])->getName()) << "operator[] nem OK!";
+    } END
+    TEST(Container, Removeteam){
+        Container.removeteam(1);
+            EXPECT_STREQ("Handball", ((Handball*)Container[1])->getName()) << "removeteam nem OK!";
+    } END
+
+#endif //Container tesztek
+
 #endif //teszt mód
 
 #if Mode == 2
@@ -183,80 +232,121 @@ int main() {
     cout << "Fitt sportegyesulet csapatkezelo szoftver" << endl;
     bool exit=false;
     int option;
+    bool jocsapat = false;
     while (!exit) {
-        cout<< "Opcio kivalasztasa(irja be a szamot / betut):\n";
+        cout << "Opcio kivalasztasa(irja be a szamot):\n";
         cout <<"\t1. Csapat hozzaadasa\n\t2. Csapat kezelese\n\t3. Csapat torlese\n\t4. Csapatok listazasa\n\t5. Kilepes"<< endl;
         cin>>option;
         switch (option) {
             case (1):
                 //Csapat hozzaadasa
+                jocsapat = false;
                 char tipus[10];
-                cout << "Kerem adja meg a csapat tipusat(Basketball/Football/Handball):";
-                cin >> tipus;
-                if (strcmp(tipus, "Basketball") == 0)
-                    csapatok.addteam(new Basketball);
-                else if (strcmp(tipus, "Football"))
-                    csapatok.addteam(new Football);
-                else if (strcmp(tipus, "Handball"))
-                    csapatok.addteam(new Handball);
-                else
-                    cout << "Rossz csapat tipus\n";
+                while (jocsapat == false) {
+                    cout << "Kerem adja meg a csapat tipusat(Basketball/Football/Handball):";
+                    cin >> tipus;
+                    if (strcmp(tipus, "Basketball") == 0) {
+                        csapatok.addteam(new Basketball);
+                        jocsapat = true;
+                    } else if (strcmp(tipus, "Football") == 0) {
+                        csapatok.addteam(new Football);
+                        jocsapat = true;
+                    } else if (strcmp(tipus, "Handball") == 0) {
+                        csapatok.addteam(new Handball);
+                        jocsapat = true;
+                    } else
+                        cout << "Rossz csapat tipus\n";
+                }
                 cout << "Kerem adja meg a csapat nevet:";
                 char nev[100];
                 cin >> nev;
                 csapatok[csapatok.size() - 1]->setName(nev);
                 break;
             case (2): {
-                int team;
+                int wteam;
                 csapatok.listnames();
                 cout << "Irja be a csapat szamat:";
-                cin >> team;
-                cout << "A kivalasztott csapat:" << csapatok[team]->getName() << endl;
+                cin >> wteam;
+                cout << "A kivalasztott csapat:" << csapatok[wteam]->getName() << endl;
                 bool submenu = false;
                 while (!submenu) {
                     int suboption;
                     cout << "Valasszon opciot:\n";
-                    cout << "\t1. Jatekos hozzaadasa\n\t2.Jatekos torlese\n\t3.Edzo hozzaadasa\n\t4.Elozo menu\n";
+                    cout
+                            << "\t1. Jatekos hozzaadasa\n\t2.Jatekos torlese\n\t3.Edzo hozzaadasa\n\t4. Egyedi ertek beallitasa\n\t5.Elozo menu\n";
                     cin >> suboption;
                     switch (suboption) {
                         case (1):
                             cout << "Adja meg a jatekos nevet:";
                             char jnev[100];
                             cin >> jnev;
-                            csapatok[team]->addplayer(jnev);
+                            csapatok[wteam]->addplayer(jnev);
                             break;
                         case (2):
                             cout << "Valassza ki a torlendo jatekost\t";
-                            csapatok[team]->listplayers(cout);
+                            csapatok[wteam]->listplayers(cout);
                             int torlendo;
                             cin >> torlendo;
-                            csapatok[team]->removeplayer(torlendo);
+                            csapatok[wteam]->removeplayer(torlendo);
                             break;
                         case (3):
                             cout << "Adja meg az edzo nevet:";
                             char enev[100];
                             cin >> enev;
-                            csapatok[team]->addcoach(enev);
+                            csapatok[wteam]->addcoach(enev);
                             break;
-                        case (4):
+                        case (4) :
+                            if (strcmp(csapatok[wteam]->classname(), "Basketball") == 0) {
+                                cout << "Kerem adja meg a Pom-Pom lanyok szamat:";
+                                int pomcnt;
+                                cin >> pomcnt;
+                                ((Basketball *) csapatok[wteam])->setpompomcnt(pomcnt);
+                            } else if (strcmp(csapatok[wteam]->classname(), "Football") == 0) {
+                                cout << "Kerem adja meg a Masodedzo nevet:";
+                                char masodedzo[100];
+                                cin >> masodedzo;
+                                String stringmasodedzo(masodedzo);
+                                ((Football *) csapatok[wteam])->setSecondcoach(stringmasodedzo);
+                            } else if (strcmp(csapatok[wteam]->classname(), "Handball") == 0) {
+                                cout << "Kerem adja meg az eves tamogatas osszeget:";
+                                int tamogatas;
+                                cin >> tamogatas;
+                                ((Handball *) csapatok[wteam])->setYearlybonus(tamogatas);
+                            }
+                            break;
+                        case (5):
                             submenu = true;
                             break;
                         default:
                             cout << "Valasszon opciot:";
-                            cout << "1. Jatekos hozzaadasa\n\t2.Jatekos torlese\n\t3.Edzo hozzaadasa\n\t4.Elozo menu\n";
+                            cout
+                                    << "1. Jatekos hozzaadasa\n\t2.Jatekos torlese\n\t3.Edzo hozzaadasa\n\t4. Egyedi ertek beallitasa\n\t5.Elozo menu\n";
                     }
                 }
                 break;
         }
+            case (3): {
+                csapatok.listnames();
+                cout << "Irja be a torlendo csapat szamat:";
+                int torlendo;
+                cin >> torlendo;
+                csapatok.removeteam(torlendo);
+                break;
+            }
+            case (4): {
+                csapatok.listnames();
+                break;
+            }
             case (5):
                 exit=true;
                 break;
             default:
-                cout<< "Opcio kivalasztasa(irja be a szamot / betut):\n";
-                cout <<"\t1. Csapat hozzaadasa\n\t2. Csapat kezelese\n\t3. Csapat torlese\n\t4. Csapatok listazasa\n\tKilepes: q"<< endl;
+                cout << "Opcio kivalasztasa(irja be a szamot):\n";
+                cout
+                        << "\t1. Csapat hozzaadasa\n\t2. Csapat kezelese\n\t3. Csapat torlese\n\t4. Csapatok listazasa\n\t5. Kilepes"
+                        << endl;
         }
     }
-
 
 #endif //Felhasználói mód
 
